@@ -317,7 +317,7 @@ function cloudstate_antora__site {
     local docs_repo_dir=$(__deploy_repo_dir "$deploy_repository")
     mkdir -p "$build_dir"
     rm -rf "$build_dir/config"
-    local exclude_modules="${excludes[@]/%/.yml}"
+    local -a exclude_modules=("${excludes[@]/%/.yml}")
     rsync -a --quiet "${exclude_modules[@]/#/--exclude=}" "$docs_repo_dir/sources/" "$build_dir/config/"
     for source in $build_dir/config/* ; do
       sources+=("$source")
